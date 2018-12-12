@@ -1,0 +1,17 @@
+#sliders{
+  padding: 20px;
+  color: #ffffff;
+  margin: 5px;
+  font-family: verdana;
+}
+
+#encoders{
+  padding: 20px;
+  color: #ffffff;
+  margin: 5px;
+  font-family: verdana;
+}
+
+button{
+  padding:10px;
+}
