@@ -1,0 +1,25 @@
+{
+  "name": "algodrons",
+  "version": "1.0.0",
+  "description": "The first time ever someones relates cottons and drones by Alfonsofonso.",
+  "main": "algodrone.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alfonsofonso/algodrons.git"
+  },
+  "keywords": [
+    "alfonsofonso",
+    "drone",
+    "music",
+    "knobs"
+  ],
+  "author": "alfonsofonso",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alfonsofonso/algodrons/issues"
+  },
+  "homepage": "https://github.com/alfonsofonso/algodrons#readme"
+}
