@@ -4,9 +4,9 @@ var mainGain=ctx.createGain();
 mainGain.connect(ctx.destination);
 var mainArr=[];
 var currentOsc=[];
-var baseNote=64;//128,256,512
-var MaxLFOfreq=100;
-var MaxFreq;
+var baseNote=128;//128,256,512
+var MaxLFOfreq=48;
+var MaxFreq=440;
 var handlers=[];
 var handlersCont=[];
 var oscs=[];
@@ -48,7 +48,7 @@ function creaOscilador(f){//toca una nota
 
 function createLFO(notarr,f){
   var lfo=ctx.createOscillator();
-  lfo.frequency.value=0.1;
+  lfo.frequency.value=1;
   lfo.name="lfo";
   lfo.start();
   notarr.push(lfo);
@@ -93,42 +93,56 @@ function cambiaFrecuencia(d){//knob 1
   }else if(currentOsc[0].frequency.value>2000){currentOsc[0].frequency.value=2000;return}else{
     currentOsc[0].frequency.linearRampToValueAtTime(currentOsc[0].frequency.value+d,ctx.currentTime+0.01);
   }
-  mueveHandler(0,currentOsc[0].frequency.value)
-  mueveHandler(1,currentOsc[0].frequency.value)
+  mueveHandler(0,currentOsc[0].frequency.value);
   console.log(mainArr.indexOf(currentOsc)+1+" = "+currentOsc[0].frequency.value);//currentOsc[0].frequency.value);
 }
+
 function cambiaFrecuenciaAbs(d){//Encoder/Slider 1
-  d=d*2000/127;
   currentOsc[0].frequency.linearRampToValueAtTime(d,ctx.currentTime+0.01);
+  handlersCont[0].childNodes[3].innerText=Math.round(d*1000)/1000;
   console.log(mainArr.indexOf(currentOsc)+1+" = "+d);
 }
 
 function cambiaFrecuenciaFino(d){//knob 2
     if(d==0){return}
   currentOsc[0].frequency.value+=d/10;
-    if(currentOsc[0].frequency.value<0){currentOsc[0].frequency.value=0
-    }else if(currentOsc[0].frequency.value>2000){currentOsc[0].frequency.value=2000;return}
-    mueveHandler(1,currentOsc[0].frequency.value);
-    mueveHandler(0,currentOsc[0].frequency.value);
+  if(currentOsc[0].frequency.value<0){currentOsc[0].frequency.value=0
+  }else if(currentOsc[0].frequency.value>MaxFreq){currentOsc[0].frequency.value=MaxFreq;return}
+
+  mueveHandler(0,currentOsc[0].frequency.value);
   console.log(mainArr.indexOf(currentOsc)+1+" freqF= "+currentOsc[0].frequency.value);
 }
-
+function cambiaFrecuenciaFinoAbs(d){//Encoder/Slider 2
+    if(d==-MaxFreq||d==0||d==MaxFreq){mueveHandler(1,0)}
+  cambiaFrecuenciaFino((d-currentOsc[0].frequency.value)/200)
+}
 function cambiaVolumen(d){//knob 3
   let v=currentOsc[2].gain.value;
   v=v+d/100;
   if(v<0){v=0}else if(v>1){v=1}
-  currentOsc[2].gain.linearRampToValueAtTime(v,ctx.currentTime+0.01);
+  currentOsc[2].gain.linearRampToValueAtTime(v,ctx.currentTime+0.001);
   mueveHandler(2,v);
   console.log(mainArr.indexOf(currentOsc)+1+" vol: "+v);
+}
+
+function cambiaVolumenAbs(d){ //knob 3
+  currentOsc[2].gain.linearRampToValueAtTime(d,ctx.currentTime+0.001);
+  handlersCont[2].childNodes[3].innerText=Math.round(d*1000)/1000;
+  console.log(mainArr.indexOf(currentOsc)+1+" vol: "+d);
 }
 
 function cambiaVolumenLFO(d){//knob 4
   let v=currentOsc[5].gain.value;
   v=v+d/100;
   if(v<0.01){v=0}else if(v>1){v=1}
-  currentOsc[5].gain.linearRampToValueAtTime(v+d/100,ctx.currentTime+0.01);
+  currentOsc[5].gain.linearRampToValueAtTime(v,ctx.currentTime+0.01);
   mueveHandler(3,v)
   console.log(mainArr.indexOf(currentOsc)+1+" LFOvol: "+v)
+}
+function cambiaVolumenLFOAbs(d){//knob 4
+  currentOsc[5].gain.linearRampToValueAtTime(d,ctx.currentTime+0.01);
+  handlersCont[3].childNodes[3].innerText=Math.round(d*1000)/1000;
+  console.log(mainArr.indexOf(currentOsc)+1+" vol: "+d);
 }
 
 function cambiaFrecuenciaLFO(d){//knob 5
@@ -136,17 +150,26 @@ function cambiaFrecuenciaLFO(d){//knob 5
   if(currentOsc[3].frequency.value<0){currentOsc[3].frequency.value=0}
   else if(currentOsc[3].frequency.value>MaxLFOfreq){currentOsc[3].frequency.value=MaxLFOfreq}
   mueveHandler(4,currentOsc[3].frequency.value);
-  mueveHandler(5,currentOsc[3].frequency.value);
   console.log(mainArr.indexOf(currentOsc)+1+" LFOfreq: "+currentOsc[3].frequency.value);
+}
+function cambiaFrecuenciaLFOAbs(d){//knob 5
+  currentOsc[3].frequency.linearRampToValueAtTime(d,ctx.currentTime+0.01);
+  handlersCont[4].childNodes[3].innerText=Math.round(d*1000)/1000;
+  console.log(mainArr.indexOf(currentOsc)+1+" = "+d);
 }
 
 function cambiaFrecuenciaLFOfino(d){//knob 5
   currentOsc[3].frequency.linearRampToValueAtTime(currentOsc[3].frequency.value+d/1000,ctx.currentTime+0.01);
   if(currentOsc[3].frequency.value<0){currentOsc[3].frequency.value=0}
   else if(currentOsc[3].frequency.value>MaxLFOfreq){currentOsc[3].frequency.value=MaxLFOfreq}
-  mueveHandler(5,currentOsc[3].frequency.value);
+
   mueveHandler(4,currentOsc[3].frequency.value);
   console.log(mainArr.indexOf(currentOsc)+1+" LFOfreq: "+currentOsc[3].frequency.value);
+}
+function cambiaFrecuenciaLFOfinoAbs(d){//knob 5
+    if(d==-48||d==0||d==MaxLFOfreq){mueveHandler(5,0)}
+
+  cambiaFrecuenciaLFOfino((d-currentOsc[3].frequency.value)/8)
 }
 
 function panea(d){ //knob 7
@@ -157,19 +180,26 @@ function panea(d){ //knob 7
   mueveHandler(6,p)
   console.log(mainArr.indexOf(currentOsc)+1+" panorama: "+p)
 }
+function paneaAbs(d){
+  currentOsc[1].pan.value=d;
+    mueveHandler(6,d)
+  console.log(mainArr.indexOf(currentOsc)+1+" panorama: "+d)
+}
+
+////////////////////////////////////////////////////////////////////////////
 
 function eligeNota(d){//Pads
-
-      currentOsc = mainArr[d];
-      for (let i = 0; i < oscs.length; i++) {
-        oscs[i].style.backgroundColor="dddddd"
-      }
-      oscs[d].style.backgroundColor="ffff00"
-      console.log(mainArr.indexOf(currentOsc)+1+" = "
-        + Math.floor(currentOsc[0].frequency.value*100)/100
-        +" ("+Math.floor(currentOsc[2].gain.value*100)/100
-        +") + "+Math.floor(currentOsc[3].frequency.value*100)/100
-        +" ("+Math.floor(currentOsc[5].gain.value*100)/100+")");
+  currentOsc = mainArr[d];
+  for (let i = 0; i < oscs.length; i++) {
+    oscs[i].style.backgroundColor="dddddd"
+  }
+  oscs[d].style.backgroundColor="ffff00";
+  updateView();
+  console.log(mainArr.indexOf(currentOsc)+1+" = "
+    + Math.floor(currentOsc[0].frequency.value*100)/100
+    +" ("+Math.floor(currentOsc[2].gain.value*100)/100
+    +") + "+Math.floor(currentOsc[3].frequency.value*100)/100
+    +" ("+Math.floor(currentOsc[5].gain.value*100)/100+")");
 }
 
 function borraNota(){
@@ -188,15 +218,14 @@ function borraNota(){
   },210)
 }
 
-function info(){
-  console.log("Instructions:");
-  console.log("Pads: 8 notas a volumen 0");
-  console.log("1:tune  2:FineTune  3:Vol  4:LFOvol ");
-  console.log("5:LFOfreq  6:LFOfreqFino  7:Panea  8:  ");
-  console.log("Functions: borraNota() //borra currentOsc ");
-  console.log("Vars: mainArr, currentOsc  ");
-  console.log(" PadMidiChannel=153, SliMidiChannel=176, TeclasMidiChannel=144, knobs, encoders, pads ");
-  console.log("for midi learning press and hold the element and rotate/push in your midi controller, then release the mouse/finger.")
+function updateView(){
+
+  mueveHandler(0,currentOsc[0].frequency.value);//freq
+  mueveHandler(2,currentOsc[2].gain.value);//vol
+  mueveHandler(3,currentOsc[3].frequency.value);//LFOfreqF
+  mueveHandler(5,currentOsc[5].gain.value);//LFOVol
+  mueveHandler(6,currentOsc[1].pan.value);//pan
+
 }
 
 function start(){
@@ -209,23 +238,23 @@ function start(){
   creaNota(5);
   creaNota(6);
   creaNota(7);
-  currentOsc=mainArr[0];
+
 
   handlers.push(window.document.getElementById('Freq'));
   handlers.push(window.document.getElementById('FreqF'));
   handlers.push(window.document.getElementById('Vol'));
-  handlers.push(window.document.getElementById('LFOVol'));
   handlers.push(window.document.getElementById('LFOfreq'));
   handlers.push(window.document.getElementById('LFOfreqF'));
+    handlers.push(window.document.getElementById('LFOVol'));
   handlers.push(window.document.getElementById('Pan'));
   handlers.push(window.document.getElementById('xxx'));
 
   handlersCont.push(window.document.getElementById('FreqCont'));
   handlersCont.push(window.document.getElementById('FreqFCont'));
   handlersCont.push(window.document.getElementById('VolCont'));
-  handlersCont.push(window.document.getElementById('LFOVolCont'));
   handlersCont.push(window.document.getElementById('LFOFreqCont'));
   handlersCont.push(window.document.getElementById('LFOFreqFCont'));
+  handlersCont.push(window.document.getElementById('LFOVolCont'));
   handlersCont.push(window.document.getElementById('PanCont'));
   handlersCont.push(window.document.getElementById('xxxCont'));
 
@@ -237,10 +266,24 @@ function start(){
   oscs.push(window.document.getElementById('osc6'));
   oscs.push(window.document.getElementById('osc7'));
   oscs.push(window.document.getElementById('osc8'));
+
+    eligeNota(0)
 }
 
 start()
-//  helpers
+
+//////////////////////////////////////////////////////////  helpers
+
+function info(){
+  console.log("Instructions:");
+  console.log("Pads: 8 notas a volumen 0");
+  console.log("1:tune  2:FineTune  3:Vol  4:LFOvol ");
+  console.log("5:LFOfreq  6:LFOfreqFino  7:Panea  8:  ");
+  console.log("Functions: borraNota() //borra currentOsc ");
+  console.log("Vars: mainArr, currentOsc  ");
+  console.log(" PadMidiChannel=153, SliMidiChannel=176, TeclasMidiChannel=144, knobs, encoders, pads ");
+  console.log("for midi learning press and hold the element and rotate/push in your midi controller, then release the mouse/finger.")
+}
 
 function noteFromPitch( frequency ) {
   var noteNum = 12 * (Math.log( frequency / 440 )/Math.log(2) );

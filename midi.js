@@ -141,9 +141,6 @@ function learnKnobChannel(c){//onmousedown
   detectingKnobChannel=true;
 }
 
-function rota(v){
-  console.log("rota: "+v)
-}
 function stopLearn(){
   learning=false;
 }

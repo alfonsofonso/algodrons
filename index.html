@@ -2,9 +2,7 @@
 <title>AlgoDrone</title>
 <link rel="stylesheet" type="text/css" href="micss.css"></link>
 <body >
-  <button type="button" ID="pads" onmousedown="learnPadChannel(this)" onchange="asigna(this.value)" >LearnPadChannel</button>
-  <button type="button" ID="knobs" onmousedown="learnKnobChannel(this)" onchange="asigna(this.value)" >LearnKnobsChannel</button>
-<br>
+
 <div>
   <br>
 <button name="1" ID="osc1" onmousedown="learn(this)" onmouseup="eligeNota(this.name-1)" type="button">Osc1</button>
@@ -24,28 +22,30 @@
   <br>
     <br>
   <div ID="FreqCont">
-    <div>Freq</div><input name="1" ID="Freq" max="2000" min="0" step="1" onmousedown="learn(this)" oninput="cambiaFrecuenciaAbs(this.value)" onmouseup="stopLearn()" type="range"><output>64</output>
+    <div>Freq</div><input name="1" ID="Freq" max="440" min="0" step="1" onmousedown="learn(this)" oninput="cambiaFrecuenciaAbs(this.value)" onmouseup="stopLearn()" type="range"><output>128</output>
   </div>
   <div ID="FreqFCont">
-    <div>FreqFine</div><input name="2" ID="FreqF" max="2000" min="0" onmousedown="learn(this)" oninput="rota(this.value)" onmouseup="function(){learning=false}" type="range"><output>64<output>
+    <div>FreqFine</div><input name="2" ID="FreqF" max="440" min="-440" onmousedown="learn(this)" oninput="cambiaFrecuenciaFinoAbs(this.value)" onmouseup="this.value=0;stopLearn()" type="range"><output><output>
   </div>
   <div ID="VolCont">
-    <div>Vol</div><input name="3" ID="Vol" max="1" min="0" step="0.01" onmousedown="learn(this)" oninput="rota(this.value)" onmouseup="function(){learning=false}" type="range"><output>0<output>
+    <div>Vol</div><input name="3" value="0" ID="Vol" max="1" min="0" step="0.01" onmousedown="learn(this)" oninput="cambiaVolumenAbs(this.value)" onmouseup="stopLearn()" type="range"><output>0<output>
   </div>
-  <div ID="LFOVolCont">
-    <div>LFOVol</div><input name="4" ID="LFOVol" max="1" min="0" step="0.01" onmousedown="learn(this)" oninput="rota(this.value)" onmouseup="function(){learning=false}" type="range"><output>0<output>
-  </div>
+  <br>
   <div ID="LFOFreqCont">
-    <div>LFOFreq</div><input name="5" ID="LFOfreq" max="100" min="0" onmousedown="learn(this)" oninput="rota(this.value)" onmouseup="function(){learning=false}" type="range"><output>1<output>
+    <div>LFOFreq</div><input name="5" value="1"  ID="LFOfreq" max="48" min="0" onmousedown="learn(this)" oninput="cambiaFrecuenciaLFOAbs(this.value)" onmouseup="stopLearn()" type="range"><output>1<output>
   </div>
   <div ID="LFOFreqFCont">
-    <div>LFOFreqFine</div><input name="6" ID="LFOfreqF" max="100" min="0" onmousedown="learn(this)" oninput="rota(this.value)" onmouseup="function(){learning=false}" type="range"><output>1<output>
+    <div>LFOFreqFine</div><input name="6" value="1" ID="LFOfreqF" max="48" min="-48" onmousedown="learn(this)" oninput="cambiaFrecuenciaLFOfinoAbs(this.value)" onmouseup="this.value=0;stopLearn()" type="range"><output><output>
   </div>
+  <div ID="LFOVolCont">
+    <div>LFOVol</div><input name="4" value=0 ID="LFOVol" max="1" min="0" step="0.01" onmousedown="learn(this)" oninput="cambiaVolumenLFOAbs(this.value)" onmouseup="stopLearn()" type="range"><output>0<output>
+  </div>
+    <br>
   <div ID="PanCont">
-    <div>Panorama</div><input name="7" ID="Pan" max="1" min="-1" step="0.01" onmousedown="learn(this)" oninput="rota(this.value)" onmouseup="function(){learning=false}" type="range"><output>0<output>
+    <div>Panorama</div><input name="7" ID="Pan" max="1" min="-1" step="0.01" onmousedown="learn(this)" oninput="paneaAbs(this.value)" onmouseup="stopLearn()" type="range"><output>0<output>
   </div>
   <div ID="xxxCont">
-    <div>xxx</div><input name="8" ID="xxx" onmousedown="learn(this)" oninput="rota(this.value)" onmouseup="function(){learning=false}" type="range"></input>
+    <div>xxx</div><input name="8" ID="xxx" onmousedown="learn(this)" oninput="rota(this.value)" onmouseup="stopLearn()" type="range"></input>
   </div>
 
 </div>
@@ -62,6 +62,9 @@
 <input name="7" onclick="" type="range">Pan</input>
 <input name="8" onclick="" type="range">xxx</input>
 </div>
+      <br>
+<button type="button" ID="pads" onmousedown="learnPadChannel(this)" onchange="asigna(this.value)" >LearnPadChannel</button>
+<button type="button" ID="knobs" onmousedown="learnKnobChannel(this)" onchange="asigna(this.value)" >LearnKnobsChannel</button> open de console for more info
 
 </body>
 
