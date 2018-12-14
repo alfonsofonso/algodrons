@@ -97,6 +97,11 @@ function cambiaFrecuencia(d){//knob 1
   mueveHandler(1,currentOsc[0].frequency.value)
   console.log(mainArr.indexOf(currentOsc)+1+" = "+currentOsc[0].frequency.value);//currentOsc[0].frequency.value);
 }
+function cambiaFrecuenciaAbs(d){//Encoder/Slider 1
+  d=d*2000/127;
+  currentOsc[0].frequency.linearRampToValueAtTime(d,ctx.currentTime+0.01);
+  console.log(mainArr.indexOf(currentOsc)+1+" = "+d);
+}
 
 function cambiaFrecuenciaFino(d){//knob 2
     if(d==0){return}
@@ -191,6 +196,7 @@ function info(){
   console.log("Functions: borraNota() //borra currentOsc ");
   console.log("Vars: mainArr, currentOsc  ");
   console.log(" PadMidiChannel=153, SliMidiChannel=176, TeclasMidiChannel=144, knobs, encoders, pads ");
+  console.log("for midi learning press and hold the element and rotate/push in your midi controller, then release the mouse/finger.")
 }
 
 function start(){

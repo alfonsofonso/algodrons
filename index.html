@@ -1,7 +1,7 @@
 <html>
 <title>AlgoDrone</title>
 <link rel="stylesheet" type="text/css" href="micss.css"></link>
-<body bgcolor="black">
+<body >
   <button type="button" ID="pads" onmousedown="learnPadChannel(this)" onchange="asigna(this.value)" >LearnPadChannel</button>
   <button type="button" ID="knobs" onmousedown="learnKnobChannel(this)" onchange="asigna(this.value)" >LearnKnobsChannel</button>
 <br>
@@ -24,42 +24,43 @@
   <br>
     <br>
   <div ID="FreqCont">
-    <div>Freq</div><input name="1" ID="Freq" max="2000" min="0" step="1" onmousedown="learn(this)" onchange="rota(this.value)" onmouseup="" type="range"><output>64</output>
+    <div>Freq</div><input name="1" ID="Freq" max="2000" min="0" step="1" onmousedown="learn(this)" oninput="cambiaFrecuenciaAbs(this.value)" onmouseup="stopLearn()" type="range"><output>64</output>
   </div>
   <div ID="FreqFCont">
-    <div>FreqFine</div><input name="2" ID="FreqF" max="2000" min="0" onmousedown="learn(this)" onchange="rota(this.value)" onmouseup="" type="range"><output>64<output>
+    <div>FreqFine</div><input name="2" ID="FreqF" max="2000" min="0" onmousedown="learn(this)" oninput="rota(this.value)" onmouseup="function(){learning=false}" type="range"><output>64<output>
   </div>
   <div ID="VolCont">
-    <div>Vol</div><input name="3" ID="Vol" max="1" min="0" step="0.01" onmousedown="learn(this)" onchange="rota(this.value)" onmouseup="" type="range"><output>0<output>
+    <div>Vol</div><input name="3" ID="Vol" max="1" min="0" step="0.01" onmousedown="learn(this)" oninput="rota(this.value)" onmouseup="function(){learning=false}" type="range"><output>0<output>
   </div>
   <div ID="LFOVolCont">
-    <div>LFOVol</div><input name="4" ID="LFOVol" max="1" min="0" step="0.01" onmousedown="learn(this)" onchange="rota(this.value)" onmouseup="" type="range"><output>0<output>
+    <div>LFOVol</div><input name="4" ID="LFOVol" max="1" min="0" step="0.01" onmousedown="learn(this)" oninput="rota(this.value)" onmouseup="function(){learning=false}" type="range"><output>0<output>
   </div>
   <div ID="LFOFreqCont">
-    <div>LFOFreq</div><input name="5" ID="LFOfreq" max="100" min="0" onmousedown="learn(this)" onchange="rota(this.value)" onmouseup="" type="range"><output>1<output>
+    <div>LFOFreq</div><input name="5" ID="LFOfreq" max="100" min="0" onmousedown="learn(this)" oninput="rota(this.value)" onmouseup="function(){learning=false}" type="range"><output>1<output>
   </div>
   <div ID="LFOFreqFCont">
-    <div>LFOFreqFine</div><input name="6" ID="LFOfreqF" max="100" min="0" onmousedown="learn(this)" onchange="rota(this.value)" onmouseup="" type="range"><output>1<output>
+    <div>LFOFreqFine</div><input name="6" ID="LFOfreqF" max="100" min="0" onmousedown="learn(this)" oninput="rota(this.value)" onmouseup="function(){learning=false}" type="range"><output>1<output>
   </div>
   <div ID="PanCont">
-    <div>Panorama</div><input name="7" ID="Pan" max="1" min="-1" step="0.01" onmousedown="learn(this)" onchange="rota(this.value)" onmouseup="" type="range"><output>0<output>
+    <div>Panorama</div><input name="7" ID="Pan" max="1" min="-1" step="0.01" onmousedown="learn(this)" oninput="rota(this.value)" onmouseup="function(){learning=false}" type="range"><output>0<output>
   </div>
   <div ID="xxxCont">
-    <div>xxx</div><input name="8" ID="xxx" onmousedown="learn(this)" onchange="rota(this.value)" onmouseup="" type="range"></input>
+    <div>xxx</div><input name="8" ID="xxx" onmousedown="learn(this)" oninput="rota(this.value)" onmouseup="function(){learning=false}" type="range"></input>
   </div>
 
 </div>
 
 <div id="encoders">
     Encoders:
-      <input name="1" onclick="" type="range">Freq</input>
-      <input name="2" onclick="" type="range">FineFreq</input>
-      <input name="3" onclick="" type="range">Vol</input>
-      <input name="4" onclick="" type="range">LFOVol</input>
-      <input name="5" onclick="" type="range">LFOFreq</input>
-      <input name="6" onclick="" type="range">LFOFineFreq</input>
-      <input name="7" onclick="" type="range">Pan</input>
-      <input name="8" onclick="" type="range">xxx</input>
+      <br>
+<input name="1" onclick="" type="range">Freq</input>
+<input name="2" onclick="" type="range">FineFreq</input>
+<input name="3" onclick="" type="range">Vol</input>
+<input name="4" onclick="" type="range">LFOVol</input>
+<input name="5" onclick="" type="range">LFOFreq</input>
+<input name="6" onclick="" type="range">LFOFineFreq</input>
+<input name="7" onclick="" type="range">Pan</input>
+<input name="8" onclick="" type="range">xxx</input>
 </div>
 
 </body>

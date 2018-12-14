@@ -144,7 +144,9 @@ function learnKnobChannel(c){//onmousedown
 function rota(v){
   console.log("rota: "+v)
 }
-
+function stopLearn(){
+  learning=false;
+}
 function mueveHandler(h,d){
   handlers[h].value=d;
   handlersCont[h].childNodes[3].innerText=Math.round(d*1000)/1000;
