@@ -1,15 +1,11 @@
-html{
-    background-color: #000  
-}
-
 body {
-  color: #fff;
+  color: #000;
   font-family: verdana;
   font-size: .8em;
 }
 #sliders{
   padding: 20px;
-  color: #fff;
+  color: #000;
   margin: 5px;
   margin-left: 50px;
   font-family: verdana;
@@ -18,7 +14,7 @@ body {
 #encoders{
   display: none;
   padding: 20px;
-  color: #fff;
+  color: #000;
   margin: 5px;
   font-family: verdana;
 }
