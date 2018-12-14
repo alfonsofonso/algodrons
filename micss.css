@@ -1,0 +1,28 @@
+html{
+    background-color: #000  
+}
+
+body {
+  color: #fff;
+  font-family: verdana;
+  font-size: .8em;
+}
+#sliders{
+  padding: 20px;
+  color: #fff;
+  margin: 5px;
+  margin-left: 50px;
+  font-family: verdana;
+}
+
+#encoders{
+  display: none;
+  padding: 20px;
+  color: #fff;
+  margin: 5px;
+  font-family: verdana;
+}
+
+button{
+  padding:10px;
+}
