@@ -9,6 +9,7 @@ body {
   margin: 5px;
   margin-left: 50px;
   font-family: verdana;
+  width: 90%
 }
 
 #encoders{
@@ -21,4 +22,12 @@ body {
 
 button{
   padding:10px;
+}
+
+.info{
+  display: none;
+}
+
+.cont{
+  width: 90%
 }

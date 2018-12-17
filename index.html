@@ -21,30 +21,30 @@
   Knobs:
   <br>
     <br>
-  <div ID="FreqCont">
+  <div ID="FreqCont" class="cont">
     <div>Freq</div><input name="1" ID="Freq" max="440" min="0" step="1" onmousedown="learn(this)" oninput="cambiaFrecuenciaAbs(this.value)" onmouseup="stopLearn()" type="range"><output>128</output>
   </div>
-  <div ID="FreqFCont">
+  <div ID="FreqFCont" class="cont">
     <div>FreqFine</div><input name="2" ID="FreqF" max="440" min="-440" onmousedown="learn(this)" oninput="cambiaFrecuenciaFinoAbs(this.value)" onmouseup="this.value=0;stopLearn()" type="range"><output><output>
   </div>
-  <div ID="VolCont">
+  <div ID="VolCont" class="cont">
     <div>Vol</div><input name="3" value="0" ID="Vol" max="1" min="0" step="0.01" onmousedown="learn(this)" oninput="cambiaVolumenAbs(this.value)" onmouseup="stopLearn()" type="range"><output>0<output>
   </div>
   <br>
-  <div ID="LFOFreqCont">
+  <div ID="LFOFreqCont" class="cont">
     <div>LFOFreq</div><input name="5" value="1"  ID="LFOfreq" max="48" min="0" onmousedown="learn(this)" oninput="cambiaFrecuenciaLFOAbs(this.value)" onmouseup="stopLearn()" type="range"><output>1<output>
   </div>
-  <div ID="LFOFreqFCont">
+  <div ID="LFOFreqFCont" class="cont">
     <div>LFOFreqFine</div><input name="6" value="1" ID="LFOfreqF" max="48" min="-48" onmousedown="learn(this)" oninput="cambiaFrecuenciaLFOfinoAbs(this.value)" onmouseup="this.value=0;stopLearn()" type="range"><output><output>
   </div>
-  <div ID="LFOVolCont">
+  <div ID="LFOVolCont" class="cont">
     <div>LFOVol</div><input name="4" value=0 ID="LFOVol" max="1" min="0" step="0.01" onmousedown="learn(this)" oninput="cambiaVolumenLFOAbs(this.value)" onmouseup="stopLearn()" type="range"><output>0<output>
   </div>
     <br>
-  <div ID="PanCont">
+  <div ID="PanCont" class="cont">
     <div>Panorama</div><input name="7" ID="Pan" max="1" min="-1" step="0.01" onmousedown="learn(this)" oninput="paneaAbs(this.value)" onmouseup="stopLearn()" type="range"><output>0<output>
   </div>
-  <div ID="xxxCont">
+  <div ID="xxxCont" class="cont">
     <div>xxx</div><input name="8" ID="xxx" onmousedown="learn(this)" oninput="rota(this.value)" onmouseup="stopLearn()" type="range"></input>
   </div>
 
@@ -63,9 +63,11 @@
 <input name="8" onclick="" type="range">xxx</input>
 </div>
       <br>
-<button type="button" ID="pads" onmousedown="learnPadChannel(this)" onchange="asigna(this.value)" >LearnPadChannel</button>
-<button type="button" ID="knobs" onmousedown="learnKnobChannel(this)" onchange="asigna(this.value)" >LearnKnobsChannel</button> open de console for more info
+<button type="button" ID="infoB"  onmousedown="showInfo()" > How to MIDI learn</button> ... or open de console for more info
+<button class="info" type="button" ID="pads" onmousedown="learnPadChannel(this)" onchange="asigna(this.value)" >LearnPadChannel</button>
+<button class="info" type="button" ID="knobs" onmousedown="learnKnobChannel(this)" onchange="asigna(this.value)" >LearnKnobsChannel</button>
 
+<div class="info">First clic the learnPadChannel button and push a pad on your controller, then the same with the learnKnobChannel, last click and hold each one of the 1-8 buttons and 1-8 sliders then push/rotate your midi controller correspondent button/knobs to MIDI Learn, release it and that's it! Stil working on encoders though (non-infinite knobs)</div>
 </body>
 
 <script src="midi.js"></script>

@@ -292,3 +292,12 @@ function noteFromPitch( frequency ) {
 function frequencyFromNoteNumber( note ) {
   return 440 * Math.pow(2,(note-69)/12);
 }
+
+function showInfo(){
+  let arr=document.getElementsByClassName("info");
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].style.display=="none"){arr[i].style.display="block"} else {arr[i].style.display="none"}
+  }
+
+
+}
