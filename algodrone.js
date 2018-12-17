@@ -131,20 +131,6 @@ function cambiaVolumenAbs(d){ //knob 3
   console.log(mainArr.indexOf(currentOsc)+1+" vol: "+d);
 }
 
-function cambiaVolumenLFO(d){//knob 4
-  let v=currentOsc[5].gain.value;
-  v=v+d/100;
-  if(v<0.01){v=0}else if(v>1){v=1}
-  currentOsc[5].gain.linearRampToValueAtTime(v,ctx.currentTime+0.01);
-  mueveHandler(3,v)
-  console.log(mainArr.indexOf(currentOsc)+1+" LFOvol: "+v)
-}
-function cambiaVolumenLFOAbs(d){//knob 4
-  currentOsc[5].gain.linearRampToValueAtTime(d,ctx.currentTime+0.01);
-  handlersCont[3].childNodes[3].innerText=Math.round(d*1000)/1000;
-  console.log(mainArr.indexOf(currentOsc)+1+" vol: "+d);
-}
-
 function cambiaFrecuenciaLFO(d){//knob 5
   currentOsc[3].frequency.linearRampToValueAtTime(currentOsc[3].frequency.value+d/10,ctx.currentTime+0.01);
   if(currentOsc[3].frequency.value<0){currentOsc[3].frequency.value=0}
@@ -168,8 +154,21 @@ function cambiaFrecuenciaLFOfino(d){//knob 6
 }
 function cambiaFrecuenciaLFOfinoAbs(d){//knob 6
     if(d==-48||d==0||d==MaxLFOfreq){mueveHandler(4,0,true)}//ponlo en medio
-console.log(d)
+    console.log(d)
   cambiaFrecuenciaLFOfino(d/8)
+}
+function cambiaVolumenLFO(d){//knob 4
+  let v=currentOsc[5].gain.value;
+  v=v+d/100;
+  if(v<0.01){v=0}else if(v>1){v=1}
+  currentOsc[5].gain.linearRampToValueAtTime(v,ctx.currentTime+0.01);
+  mueveHandler(5,v)
+  console.log(mainArr.indexOf(currentOsc)+1+" LFOvol: "+v)
+}
+function cambiaVolumenLFOAbs(d){//knob 4
+  currentOsc[5].gain.linearRampToValueAtTime(d,ctx.currentTime+0.01);
+  handlersCont[5].childNodes[3].innerText=Math.round(d*1000)/1000;
+  console.log(mainArr.indexOf(currentOsc)+1+" vol: "+d);
 }
 
 function panea(d){ //knob 7

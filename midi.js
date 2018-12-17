@@ -72,12 +72,11 @@ function onMIDIMessage(message) {
     }else if(data[1]==knobs[2]){
       cambiaVolumen(data[2]-64)
     }else if(data[1]==knobs[3]){
-      cambiaVolumenLFO(data[2]-64)
-
+        cambiaFrecuenciaLFO(data[2]-64)
     }else if(data[1]==knobs[4]){
-      cambiaFrecuenciaLFO(data[2]-64)
+    cambiaFrecuenciaLFOfino(data[2]-64)
     }else if(data[1]==knobs[5]){
-      cambiaFrecuenciaLFOfino(data[2]-64)
+      cambiaVolumenLFO(data[2]-64)
     }else if(data[1]==knobs[6]){
         panea(data[2]-64);
     }else if(data[1]==knobs[7]){
