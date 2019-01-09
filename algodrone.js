@@ -4,14 +4,15 @@ var mainGain=ctx.createGain();
 mainGain.connect(ctx.destination);
 var mainArr=[];
 var currentOsc=[];
-var baseNote=128;//128,256,512
-var MaxLFOfreq=48;
+var baseNote=256;//128,256,512
+var MaxLFOfreq=2;
 var MaxFreq=440;
 var handlers=[];
 var handlersCont=[];
 var oscs=[];
+var empezar= false;
 
-function creaOscilador(f){//toca una nota
+function creaOscilador(){//toca una nota
   var notarr=[];
   // oscilador
   var o = ctx.createOscillator();
@@ -60,7 +61,7 @@ function creaOscilador(f){//toca una nota
 
 
 function creaNota(f){
-  mainArr.push(creaOscilador(f));
+  mainArr.push(creaOscilador());
   //console.log("cu= "+mainArr.indexOf(currentOsc));
 }
 
@@ -71,13 +72,17 @@ function duplicaNota(f){
 function cambiaVolumen(d){//knob 3
   let v=currentOsc[2].gain.value;
   v=v+d/100;
-  if(v<0){v=0}else if(v>1){v=1}
+  if(v<0){v=0}else if(v>0.91){v=0.91}
   currentOsc[2].gain.linearRampToValueAtTime(v,ctx.currentTime+0.001);
     currentOsc[5].gain.linearRampToValueAtTime(v,ctx.currentTime+0.001);
   mueveHandler(0,v);
   console.log(mainArr.indexOf(currentOsc)+1+" vol: "+v);
 }
 function cambiaVolumenAbs(d){ //knob 3
+  if(!empezar){
+    empezar=true
+    ctx.resume();
+  }
   currentOsc[2].gain.linearRampToValueAtTime(d,ctx.currentTime+0.001);
     currentOsc[5].gain.linearRampToValueAtTime(d,ctx.currentTime+0.001);
   handlersCont[0].childNodes[3].innerText=Math.round(d*1000)/1000;
@@ -140,7 +145,7 @@ function cambiaFrecuenciaLFOfino(d){//knob 6
   console.log(mainArr.indexOf(currentOsc)+1+" LFOfreq: "+currentOsc[3].frequency.value);
 }
 function cambiaFrecuenciaLFOfinoAbs(d){//knob 6
-    if(d==-48||d==0||d==MaxLFOfreq){mueveHandler(3,0,true)}//ponlo en medio
+    if(d==-MaxLFOfreq||d==0||d==MaxLFOfreq){mueveHandler(3,0,true)}//ponlo en medio
   cambiaFrecuenciaLFOfino(d/8)
 }
 
@@ -191,16 +196,18 @@ function updateView(){//handlers view
 
 }
 
-function start(){
+function start(n){
+  //if(n==null||n==undefined){n=3}
+  window.document.getElementById('startPoint').style.display="none";
+  window.document.getElementById('sliders').style.display="inline";
+  console.log("voy a hacer "+n+" estrellas")
+  numStars=n;
   info();
-  creaNota(0);
-  creaNota(1);
-  creaNota(2);
-  // creaNota(3);
-  // creaNota(4);
-  // creaNota(5);
-  // creaNota(6);
-  // creaNota(7);
+  for (let i = 0; i < numStars; i++) {
+    creaNota(i);
+    console.log("hago star: "+parseInt(i))
+  }
+
 
   handlers.push(window.document.getElementById('Vol'));
   handlers.push(window.document.getElementById('Freq'));
@@ -218,20 +225,14 @@ function start(){
   handlersCont.push(window.document.getElementById('PanCont'));
   handlersCont.push(window.document.getElementById('xxxCont'));
 
-  oscs.push(window.document.getElementById('osc1'));
-  oscs.push(window.document.getElementById('osc2'));
-  oscs.push(window.document.getElementById('osc3'));
-  // oscs.push(window.document.getElementById('osc4'));
-  // oscs.push(window.document.getElementById('osc5'));
-  // oscs.push(window.document.getElementById('osc6'));
-  // oscs.push(window.document.getElementById('osc7'));
-  // oscs.push(window.document.getElementById('osc8'));
+  for (let i = 0; i < n; i++) {
+    oscs.push(window.document.getElementById("osc"+i));
+  }
 
   pintaCanvas();
   tocaEstrella(0);
 }
 
-start()
 
 //////////////////////////////////////////////////////////  helpers
 

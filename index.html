@@ -3,41 +3,42 @@
 <link rel="stylesheet" type="text/css" href="micss.css"></link>
 <body>
 
-<div>
-  <br>
-<button name="1" ID="osc1" onmousedown="learn(this)" onmouseup="eligeNota(this.name-1)" type="button">Osc1</button>
-<button name="2" ID="osc2" onmousedown="learn(this)" onmouseup="eligeNota(this.name-1)" type="button">Osc2</button>
-<button name="3" ID="osc3" onmousedown="learn(this)" onmouseup="eligeNota(this.name-1)" type="button">Osc3</button>
-<button name="4" ID="osc4" onmousedown="learn(this)" onmouseup="eligeNota(this.name-1)" type="button">Osc4</button>
-<button name="5" ID="osc5" onmousedown="learn(this)" onmouseup="eligeNota(this.name-1)" type="button">Osc5</button>
-<button name="6" ID="osc6" onmousedown="learn(this)" onmouseup="eligeNota(this.name-1)" type="button">Osc6</button>
-<button name="7" ID="osc7" onmousedown="learn(this)" onmouseup="eligeNota(this.name-1)" type="button">Osc7</button>
-<button name="8" ID="osc8" onmousedown="learn(this)" onmouseup="eligeNota(this.name-1)" type="button">Osc8</button>
+<canvas ID="micanvas"></canvas>
+
+<div ID="startPoint">
+
+  <div class="dropdown">
+    Number of stars?
+    <br>
+    <div class="dropdown-content">
+      <br>
+      <button class="elige" onclick="start(1)">1</button>
+      <button class="elige" onclick="start(2)">2</button>
+      <button class="elige" onclick="start(3)">3</button>
+      <button class="elige" onclick="start(4)">4</button>
+      <button class="elige" onclick="start(5)">5</button>
+      <button class="elige" onclick="start(6)">6</button>
+    </div>
+  </div>
 
 </div>
-<canvas ID="micanvas"></canvas>
-<div id="sliders">
-  <br>
 
-  <br>
-    <br>
+<div id="sliders">
+
     <div ID="VolCont" class="cont">
       <div>Volume</div><input name="1" value="0" ID="Vol" max="1" min="0" step="0.01" onmousedown="learn(this)" oninput="cambiaVolumenAbs(this.value)" onmouseup="stopLearn()" type="range"><output>0<output>
     </div>
   <div ID="FreqCont" class="cont">
-    <div>Pitch</div><input name="2" ID="Freq" max="440" min="0" step="1" onmousedown="learn(this)" oninput="cambiaFrecuenciaAbs(this.value)" onmouseup="stopLearn()" type="range"><output>128</output>
+    <div>Tone (Hz)</div><input name="2" ID="Freq" max="440" min="0" step="0.1" onmousedown="learn(this)" oninput="cambiaFrecuenciaAbs(this.value)" onmouseup="stopLearn()" type="range"><output>128</output>
   </div>
   <div ID="FreqFCont" class="cont">
-    <div>PitchFine</div><input name="3" ID="FreqF" max="440" min="-440" onmousedown="learn(this)" oninput="cambiaFrecuenciaFinoAbs(this.value)" onmouseup="this.value=0;stopLearn()" type="range"><output><output>
-  </div>
-  <br>
-  <div ID="LFOFreqCont" class="cont">
-    <div>Rythm</div><input name="4" value="1"  ID="LFOfreq" max="48" min="0" onmousedown="learn(this)" oninput="cambiaFrecuenciaLFOAbs(this.value)" onmouseup="stopLearn()" type="range"><output>1<output>
+    <div>Fine Tone</div><input name="3" ID="FreqF" max="440" min="-440" onmousedown="learn(this)" oninput="cambiaFrecuenciaFinoAbs(this.value)" onmouseup="this.value=0;stopLearn()" type="range"><output><output>
   </div>
 
-  <div ID="LFOFreqFCont" class="cont">
-    <div>RythmFine</div><input name="5" value="1" ID="LFOfreqF" max="48" min="-48" onmousedown="learn(this)" oninput="cambiaFrecuenciaLFOfinoAbs(this.value)" onmouseup="this.value=0;stopLearn()" type="range"><output><output>
+  <div ID="LFOFreqCont" class="cont">
+    <div>Rythm</div><input name="4" value="1"  ID="LFOfreq" max="2" step="0.001" min="0" onmousedown="learn(this)" oninput="cambiaFrecuenciaLFOAbs(this.value)" onmouseup="stopLearn()" type="range"><output>1<output>
   </div>
+
     <br>
 <div ID="PanCont" class="cont">
     <div>Panorama</div><input name="6" ID="Pan" max="1" min="-1" step="0.01" onmousedown="learn(this)" oninput="paneaAbs(this.value)" onmouseup="stopLearn()" type="range"><output>0<output>
@@ -48,8 +49,8 @@
 
 </div>
 
-<button ID="savefile">guardar</button><br />
-<button type="button" ID="infoB"  onmousedown="showInfo()" > How to MIDI learn</button>
+<button ID="savefile">guardar</button>
+<button type="button" ID="infoB"  onclick="showInfo()" >midi</button>
 <button class="info" type="button" ID="pads" onmousedown="learnPadChannel(this)" onchange="asigna(this.value)" >LearnPadChannel</button>
 <button class="info" type="button" ID="knobs" onmousedown="learnKnobChannel(this)" onchange="asigna(this.value)" >LearnKnobsChannel</button>
 
