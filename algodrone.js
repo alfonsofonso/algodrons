@@ -85,7 +85,7 @@ function cambiaVolumenAbs(d){ //knob 3
   }
   currentOsc[2].gain.linearRampToValueAtTime(d,ctx.currentTime+0.001);
     currentOsc[5].gain.linearRampToValueAtTime(d,ctx.currentTime+0.001);
-  handlersCont[0].childNodes[3].innerText=Math.round(d*1000)/1000;
+  handlersCont[0].childNodes[2].innerText=Math.round(d*1000)/1000;
   console.log(mainArr.indexOf(currentOsc)+1+" vol: "+d);
 }
 
@@ -102,7 +102,7 @@ function cambiaFrecuencia(d){//knob 1
 
 function cambiaFrecuenciaAbs(d){//Encoder/Slider 1
   currentOsc[0].frequency.linearRampToValueAtTime(d,ctx.currentTime+0.01);
-  handlersCont[1].childNodes[3].innerText=Math.round(d*1000)/1000;
+  handlersCont[1].childNodes[2].innerText=Math.round(d*1000)/1000;
     mueveEstrella(d)
   console.log(mainArr.indexOf(currentOsc)+1+" = "+d);
 }
@@ -132,7 +132,7 @@ function cambiaFrecuenciaLFO(d){//knob 5
 }
 function cambiaFrecuenciaLFOAbs(d){//knob 5
   currentOsc[3].frequency.linearRampToValueAtTime(d,ctx.currentTime+0.01);
-  handlersCont[3].childNodes[3].innerText=Math.round(d*1000)/1000;
+  handlersCont[3].childNodes[2].innerText=Math.round(d*1000)/1000;
   console.log(mainArr.indexOf(currentOsc)+1+" = "+d);
 }
 

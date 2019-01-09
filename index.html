@@ -8,7 +8,13 @@
 <div ID="startPoint">
 
   <div class="dropdown">
-    Number of stars?
+    Welcome to AlgoDrone
+    <br>
+    Simple additive Drone music with your browser.
+    <br>
+    find the code <a href="https://github.com/alfonsofonso/algodrons">here</a>
+    <br>
+    Number of oscillators:
     <br>
     <div class="dropdown-content">
       <br>
@@ -26,17 +32,17 @@
 <div id="sliders">
 
     <div ID="VolCont" class="cont">
-      <div>Volume</div><input name="1" value="0" ID="Vol" max="1" min="0" step="0.01" onmousedown="learn(this)" oninput="cambiaVolumenAbs(this.value)" onmouseup="stopLearn()" type="range"><output>0<output>
+      <div class="param">Volume: </div><div class="param">0</div>
+      <input name="1" value="0" ID="Vol" max="1" min="0" step="0.01" onmousedown="learn(this)" oninput="cambiaVolumenAbs(this.value)" onmouseup="stopLearn()" type="range">
     </div>
   <div ID="FreqCont" class="cont">
-    <div>Tone (Hz)</div><input name="2" ID="Freq" max="440" min="0" step="0.1" onmousedown="learn(this)" oninput="cambiaFrecuenciaAbs(this.value)" onmouseup="stopLearn()" type="range"><output>128</output>
-  </div>
-  <div ID="FreqFCont" class="cont">
-    <div>Fine Tone</div><input name="3" ID="FreqF" max="440" min="-440" onmousedown="learn(this)" oninput="cambiaFrecuenciaFinoAbs(this.value)" onmouseup="this.value=0;stopLearn()" type="range"><output><output>
+    <div class="param">Tone (Hz): </div><div class="param">256</div>
+    <input name="2" ID="Freq" max="440" min="0" step="0.1" onmousedown="learn(this)" oninput="cambiaFrecuenciaAbs(this.value)" onmouseup="stopLearn()" type="range">
   </div>
 
   <div ID="LFOFreqCont" class="cont">
-    <div>Rythm</div><input name="4" value="1"  ID="LFOfreq" max="2" step="0.001" min="0" onmousedown="learn(this)" oninput="cambiaFrecuenciaLFOAbs(this.value)" onmouseup="stopLearn()" type="range"><output>1<output>
+    <div class="param">Rythm: </div><div class="param">0</div>
+    <input name="4" value="1"  ID="LFOfreq" max="2" step="0.001" min="0" onmousedown="learn(this)" oninput="cambiaFrecuenciaLFOAbs(this.value)" onmouseup="stopLearn()" type="range">
   </div>
 
     <br>

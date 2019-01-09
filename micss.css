@@ -35,16 +35,16 @@ input{
 
 button{
   padding:10px;
-display: none;
+  display: none;
 }
 #empieza{
   display: inline;
 }
 #startPoint{
   position: absolute;
-  left:30%;
-  top:30%;
-  font-size: 1.5em;
+  left:20%;
+  top:20%;
+  font-size: 2em;
 
 }
 .dropbtn{
@@ -56,6 +56,7 @@ display: none;
   display: inline;
   border-radius: 8px;
     font-size: 1em;
+    color: #888888;
 }
 .info{
   display: none;
@@ -68,10 +69,12 @@ display: none;
   display: none;
 }
 #infoB{
-  display: inline;
-  right: 30px;
+  position: absolute;
+  display: grid;
   background-color: #888888;
   border-radius: 3px;
+  right: 1px;
+  bottom: 1px;
 
 }
 .cont{
@@ -82,22 +85,25 @@ display: none;
 }
 #xxxCont{
   display: none
-
 }
-
+.param{
+  font-size: 1.9em;
+  width: 40%;
+  display: inline;
+}
 
 input[type=range] {
   height: 32px;
   -webkit-appearance: none;
-  margin: 10px 0;
-  width: 95%;
+  margin-left: 40px;
+  width: 90%;
   background-color: #111111;
 }
 input[type=range]:focus {
   outline: none;
 }
 input[type=range]::-webkit-slider-runnable-track {
-  width: 100%;
+  width: 95%;
   height: 16px;
   cursor: pointer;
   animate: 0.2s;

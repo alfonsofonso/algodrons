@@ -21,7 +21,7 @@ if (navigator.requestMIDIAccess) {
     navigator.requestMIDIAccess({
         sysex: false // this defaults to 'false' and we won't be covering sysex in this article.
     }).then(onMIDISuccess, onMIDIFailure);
-} else { alert("No MIDI support in your browser."); }
+} else { alert("No MIDI support in your browser.");}
 // midi functions
 function onMIDISuccess(midiAccess) {
     // when we get a succesful response, run this code
@@ -146,7 +146,7 @@ function stopLearn(){
 function mueveHandler(h,d,b){
   handlers[h].value=d;
   if(b==true){return}
-  handlersCont[h].childNodes[3].innerText=Math.round(d*1000)/1000;
+  handlersCont[h].childNodes[2].textContent=Math.round(d*1000)/1000;
 }
 
 function asigna(){}
