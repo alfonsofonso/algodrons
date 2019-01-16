@@ -31,7 +31,7 @@ function creaOscilador(){//toca una nota
   notarr.push(g);
   // LFO
   var lfo=ctx.createOscillator();
-  lfo.frequency.value=0;
+  lfo.frequency.value=0.1;
   lfo.name="lfo";
   lfo.start();
   notarr.push(lfo);
